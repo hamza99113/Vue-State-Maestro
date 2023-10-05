@@ -13,26 +13,38 @@ const store = createStore({
     addOne(state) {
       state.counter = state.counter + 2;
     },
-    increase(state, payload){
-        state.counter = state.counter + payload.value; 
+    increase(state, payload) {
+      state.counter = state.counter + payload.value;
     },
   },
-  getters:{
-    finalCounter(state){
-        return state.counter * 2;
+  actions: {
+    addOne(context) {
+      setTimeout(function () {
+        context.commit('addOne');
+      }, 2000);
     },
-    normalizedCounter(state, getters){
-        // const finalCounter = state.counter * 3;
-        const finalCounter = getters.finalCounter;
-        if(finalCounter < 0){
-            return 0;
-        }
-        if (finalCounter > 100){
-            return 100;
-        }
-        return finalCounter;
-    }
-}
+    increase(context, payload) {
+      setTimeout(function () {
+        context.commit('increase', payload);
+      }, 2000);
+    },
+  },
+  getters: {
+    finalCounter(state) {
+      return state.counter * 2;
+    },
+    normalizedCounter(state, getters) {
+      // const finalCounter = state.counter * 3;
+      const finalCounter = getters.finalCounter;
+      if (finalCounter < 0) {
+        return 0;
+      }
+      if (finalCounter > 100) {
+        return 100;
+      }
+      return finalCounter;
+    },
+  },
 });
 const app = createApp(App);
 

@@ -11,7 +11,7 @@ export default {
     counter() {
     //   return this.$store.state.counter;
     //   return this.$store.getters.finalCounter;
-       return this.$store.getters.normalizedCounter;
+       return this.$store.getters['numbers/normalizedCounter'];
     },
   },
 };
